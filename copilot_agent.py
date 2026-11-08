@@ -52,15 +52,26 @@ def calculate_risk_score(sol_balance: float, tx_count: int, token_count: int) ->
         
     return {"score": score, "level": level}
 
+import pandas as pd
+import streamlit as st
+
 def analyze_time_series_trend(recent_txs):
-    """Calculates rolling average and trend status from transaction timestamps."""
+    """Calculates rolling average and trend status from transaction timestamps safely."""
+    if not recent_txs:
+        return {"trend_status": "No Transaction History", "spike_detected": False}
+        
     df_tx = pd.DataFrame(recent_txs)
+    
+    # Check if 'timestamp' column exists to prevent cloud KeyError crashes
+    if "timestamp" not in df_tx.columns:
+        return {"trend_status": "RPC Rate-Limited / No Timestamp Data", "spike_detected": False}
+        
     df_valid = df_tx[df_tx["timestamp"] != "N/A"].copy()
     
     if df_valid.empty:
         return {"trend_status": "Insufficient Data", "spike_detected": False}
         
-    df_valid["datetime"] = pd.to_datetime(df_valid["timestamp"])
+    df_valid["datetime"] = pd.to_datetime(df_valid["datetime"] if "datetime" in df_valid.columns else df_valid["timestamp"])
     df_valid = df_valid.sort_values("datetime")
     df_valid.set_index("datetime", inplace=True)
     
@@ -80,7 +91,7 @@ def analyze_time_series_trend(recent_txs):
         "trend_status": trend_status,
         "spike_detected": spike_detected
     }
-
+    
 def run_copilot(user_prompt: str, wallet_address: str):
     current_key = os.environ.get("GROQ_API_KEY", "")
     if current_key:
