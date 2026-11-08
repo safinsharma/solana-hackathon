@@ -6,7 +6,7 @@ from solana_service import get_sol_balance, get_spl_tokens, get_recent_transacti
 
 client = OpenAI(
     base_url="https://api.groq.com/openai/v1",
-    api_key=os.environ.get("GROQ_API_KEY", "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")
+    api_key=os.environ.get("GROQ_API_KEY", "")
 )
 
 def calculate_risk_score(sol_balance: float, tx_count: int, token_count: int) -> dict:
@@ -118,12 +118,12 @@ def run_copilot(user_prompt: str, wallet_address: str):
         if not final_content or "can't help" in final_content.lower() or "sorry" in final_content.lower():
             risk = calculate_risk_score(sol_balance, len(recent_txs), len(tokens))
             final_content = (
-                f"### 📊 Portfolio & Time-Series Executive Summary\n"
+                f"### Portfolio & Time-Series Executive Summary\n"
                 f"**Target Wallet:** `{wallet_address}`\n\n"
                 f"* **Risk Score:** `{risk['score']}/100` ({risk['level']})\n"
                 f"* **Native SOL Balance:** `{sol_balance:,.4f} SOL`\n"
                 f"* **Activity Trend:** `{ts_analysis.get('trend_status', 'Stable')}`\n"
-                f"* **Anomaly Spike Detected:** `{'Yes ⚠️' if spike_val else 'Normal ✅'}`\n"
+                f"* **Anomaly Spike Detected:** `{'Yes' if spike_val else 'Normal'}`\n"
             )
             
         return final_content, sol_balance, tokens, recent_txs, ts_analysis
