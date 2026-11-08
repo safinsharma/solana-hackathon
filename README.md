@@ -132,9 +132,4 @@ Try testing the app with these pre-configured Solana mainnet targets directly in
 
 ---
 
-## Hackathon Achievements Summary
-
-- Fully functional Python + Streamlit application.
-- Multi-dimensional risk score logic (1–100 scale).
-- Live time-series moving average and anomaly spike detection.
-- Hybrid LLM + deterministic fallback mechanism for reliable safety reports.
+PS: It seems that the streamlit deployment is not working correctly because of some problems with the secrets folder so there may be a need to clone the repo and run it locally to fully see the project in action.
