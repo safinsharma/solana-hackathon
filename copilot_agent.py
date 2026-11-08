@@ -7,19 +7,16 @@ import streamlit as st
 
 api_key = ""
 try:
-    if "GROQ_API_KEY" in st.secrets:
-        api_key = st.secrets["GROQ_API_KEY"]
-    elif "OPENAI_API_KEY" in st.secrets:
-        api_key = st.secrets["OPENAI_API_KEY"]
+    api_key = st.secrets["GROQ_API_KEY"]
 except Exception:
     pass
 
 if not api_key:
-    api_key = os.environ.get("GROQ_API_KEY", "") or os.environ.get("OPENAI_API_KEY", "")
+    api_key = os.environ.get("GROQ_API_KEY", "")
     
 client = OpenAI(
     base_url="https://api.groq.com/openai/v1",
-    api_key="gsk_1M7XPk33y4oi6sGFIDc1WGdyb3FYwgVb1Phs5jM9s1X56r"
+    api_key= api_key
 )
 
 def calculate_risk_score(sol_balance: float, tx_count: int, token_count: int) -> dict:
