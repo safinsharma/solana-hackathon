@@ -3,13 +3,25 @@ import json
 import pandas as pd
 from openai import OpenAI
 from solana_service import get_sol_balance, get_spl_tokens, get_recent_transactions
+import streamlit as st
 
-active_api_key = os.environ.get("GROQ_API_KEY") or os.environ.get("OPENAI_API_KEY", "")
+api_key = ""
+try:
+    if "GROQ_API_KEY" in st.secrets:
+        api_key = st.secrets["GROQ_API_KEY"]
+    elif "OPENAI_API_KEY" in st.secrets:
+        api_key = st.secrets["OPENAI_API_KEY"]
+except Exception:
+    pass
+
+if not api_key:
+    api_key = os.environ.get("GROQ_API_KEY", "") or os.environ.get("OPENAI_API_KEY", "")
 
 client = OpenAI(
     base_url="https://api.groq.com/openai/v1",
-    api_key=active_api_key
+    api_key=api_key
 )
+
 def calculate_risk_score(sol_balance: float, tx_count: int, token_count: int) -> dict:
     score = 10
     if sol_balance > 1000000:
