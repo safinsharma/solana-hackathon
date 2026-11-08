@@ -16,6 +16,8 @@ except Exception:
 
 if not api_key:
     api_key = os.environ.get("GROQ_API_KEY", "") or os.environ.get("OPENAI_API_KEY", "")
+    
+api_key = st.secrets.GROQ_API_KEY
 
 client = OpenAI(
     base_url="https://api.groq.com/openai/v1",
