@@ -17,11 +17,9 @@ except Exception:
 if not api_key:
     api_key = os.environ.get("GROQ_API_KEY", "") or os.environ.get("OPENAI_API_KEY", "")
     
-api_key = "gsk_1M7XPk33y4oi6sGFIDc1WGdyb3FYwgVb1Phs5jM9s1X56r"
-
 client = OpenAI(
     base_url="https://api.groq.com/openai/v1",
-    api_key=api_key
+    api_key="gsk_1M7XPk33y4oi6sGFIDc1WGdyb3FYwgVb1Phs5jM9s1X56r"
 )
 
 def calculate_risk_score(sol_balance: float, tx_count: int, token_count: int) -> dict:
