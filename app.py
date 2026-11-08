@@ -26,18 +26,18 @@ st.markdown("Your autonomous onchain assistant for real-time wallet auditing, dy
 
 # Sidebar Configuration
 with st.sidebar:
-    st.header("⚙️ Configuration")
+    st.header("Configuration")
     groq_key = st.text_input("Groq API Key", type="password", value=os.environ.get("GROQ_API_KEY", ""))
     if groq_key:
         os.environ["GROQ_API_KEY"] = groq_key
         
     st.markdown("---")
-    st.markdown("### 💡 Quick-Test Wallets")
+    st.markdown("### Quick-Test Wallets")
     if st.button("🐋 Active Whale / Foundation"):
         st.session_state["wallet_input"] = "9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM"
-    if st.button("⚡ Active Trader Address"):
+    if st.button("Active Trader Address"):
         st.session_state["wallet_input"] = "MJKqp326RZCHnAAbew9MDdui3iCKWco7fsK9sVuZTX2"
-    if st.button("✨ Clean / Empty Wallet"):
+    if st.button("Clean / Empty Wallet"):
         st.session_state["wallet_input"] = "11111111111111111111111111111111"
 
 # Main Input Controls
@@ -51,22 +51,22 @@ user_query = st.text_input(
 
 col_btn1, col_btn2 = st.columns([1, 5])
 with col_btn1:
-    analyze_clicked = st.button("Run Audit 🚀", type="primary", use_container_width=True)
+    analyze_clicked = st.button("Run Audit", type="primary", use_container_width=True)
 
 if analyze_clicked:
     if not os.environ.get("GROQ_API_KEY"):
-        st.error("⚠️ Please enter your Groq API Key in the sidebar first!")
+        st.error("Please enter your Groq API Key in the sidebar first!")
     elif not wallet_address.strip():
-        st.error("⚠️ Please enter a valid Solana wallet address.")
+        st.error("Please enter a valid Solana wallet address.")
     else:
-        with st.spinner("🤖 Copilot is analyzing blockchain time-series data, computing rolling baselines, and scoring risk..."):
+        with st.spinner("Copilot is analyzing blockchain time-series data, computing rolling baselines, and scoring risk..."):
             try:
                 response_text, sol_balance, tokens, recent_txs, ts_analysis = run_copilot(user_query, wallet_address.strip())
                 risk = calculate_risk_score(sol_balance, len(recent_txs), len(tokens))
                 
                 # --- Metrics Row ---
                 st.markdown("---")
-                st.subheader("📊 Portfolio At-a-Glance")
+                st.subheader("Portfolio At-a-Glance")
                 
                 m1, m2, m3, m4 = st.columns(4)
                 with m1:
@@ -89,10 +89,10 @@ if analyze_clicked:
                 
                 # --- Tabs ---
                 tab1, tab2, tab3, tab4 = st.tabs([
-                    "🤖 AI Intelligence Report", 
-                    "📈 Velocity & Trend Forecasting", 
-                    "🪙 SPL Token Holdings", 
-                    "📜 Recent Transactions"
+                    "AI Intelligence Report", 
+                    "Velocity & Trend Forecasting", 
+                    "SPL Token Holdings", 
+                    "Recent Transactions"
                 ])
                 
                 with tab1:
@@ -106,7 +106,7 @@ if analyze_clicked:
                         with col_t1:
                             st.metric(label="Detected Trend Status", value=ts_analysis["trend_status"])
                         with col_t2:
-                            spike_status = "Yes ⚠️ (Potential Bot/DEX Spike)" if ts_analysis["spike_detected"] else "Normal Baseline ✅"
+                            spike_status = "Yes (Potential Bot/DEX Spike)" if ts_analysis["spike_detected"] else "Normal Baseline ✅"
                             st.metric(label="Anomaly Status", value=spike_status)
                             
                         st.markdown("#### Hourly Activity vs. Rolling Average Baseline")

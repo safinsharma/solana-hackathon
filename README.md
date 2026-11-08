@@ -4,7 +4,7 @@
 
 ---
 
-## 📌 Project Overview
+## Project Overview
 
 Navigating on-chain data on Solana can be overwhelming for everyday users and institutional treasuries alike. Raw JSON-RPC responses, high transaction velocities, and complex token mint balances make manual security auditing difficult.
 
@@ -18,7 +18,7 @@ It provides an **autonomous, smarter, and safer on-chain experience**:
 
 ---
 
-## 🎯 AI Track Rubric Alignment
+## AI Track Rubric Alignment
 
 This project specifically targets the **Solana Hackathon AI Track** criteria (*Making on-chain activity smarter, safer, or easier*):
 
@@ -31,7 +31,7 @@ This project specifically targets the **Solana Hackathon AI Track** criteria (*M
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Frontend / UI:** [Streamlit](https://streamlit.io/) (with custom CSS dark-theme polish)
 - **Language & Data Processing:** Python 3.10+, [Pandas](https://pandas.pydata.org/)
@@ -40,7 +40,7 @@ This project specifically targets the **Solana Hackathon AI Track** criteria (*M
 
 ---
 
-## 🚀 Getting Started Locally
+## Getting Started Locally
 
 Follow these 3 simple steps to run the application on your local machine:
 
@@ -82,7 +82,7 @@ Open your browser to `http://localhost:8501`.
 
 ---
 
-## 📊 How It Works
+## How It Works
 
 ```
                      ┌────────────────────────────────┐
@@ -119,7 +119,7 @@ Open your browser to `http://localhost:8501`.
 
 ---
 
-## 💡 Quick-Test Wallets
+## Quick-Test Wallets
 
 Try testing the app with these pre-configured Solana mainnet targets directly inside the sidebar:
 
@@ -132,13 +132,9 @@ Try testing the app with these pre-configured Solana mainnet targets directly in
 
 ---
 
-## 🏆 Hackathon Achievements Summary
+## Hackathon Achievements Summary
 
-- ✅ Fully functional Python + Streamlit application.
-- ✅ Multi-dimensional risk score logic (1–100 scale).
-- ✅ Live time-series moving average and anomaly spike detection.
-- ✅ Hybrid LLM + deterministic fallback mechanism for reliable safety reports.
-
----
-
-*Built with ❤️ for the Solana Hackathon.*
+- Fully functional Python + Streamlit application.
+- Multi-dimensional risk score logic (1–100 scale).
+- Live time-series moving average and anomaly spike detection.
+- Hybrid LLM + deterministic fallback mechanism for reliable safety reports.
