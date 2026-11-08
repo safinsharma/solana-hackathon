@@ -4,11 +4,12 @@ import pandas as pd
 from openai import OpenAI
 from solana_service import get_sol_balance, get_spl_tokens, get_recent_transactions
 
+active_api_key = os.environ.get("GROQ_API_KEY") or os.environ.get("OPENAI_API_KEY", "")
+
 client = OpenAI(
     base_url="https://api.groq.com/openai/v1",
-    api_key=os.environ.get("GROQ_API_KEY", "")
+    api_key=active_api_key
 )
-
 def calculate_risk_score(sol_balance: float, tx_count: int, token_count: int) -> dict:
     score = 10
     if sol_balance > 1000000:
